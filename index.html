@@ -63,24 +63,6 @@
         </div>
     </section>
 
-    <!-- Stats Bar -->
-    <section class="border-y border-slate-800 bg-slate-900/30 py-8">
-        <div class="max-w-4xl mx-auto grid grid-cols-3 text-center px-4">
-            <div>
-                <div class="text-3xl font-extrabold text-white">127</div>
-                <div class="text-xs text-slate-500 uppercase tracking-wider mt-1">Founding Creators</div>
-            </div>
-            <div>
-                <div class="text-3xl font-extrabold text-white">38</div>
-                <div class="text-xs text-slate-500 uppercase tracking-wider mt-1">Countries</div>
-            </div>
-            <div>
-                <div class="text-3xl font-extrabold text-white">Warzone</div>
-                <div class="text-xs text-slate-500 uppercase tracking-wider mt-1">Season 0 Beta</div>
-            </div>
-        </div>
-    </section>
-
     <!-- Leaderboard Preview -->
     <section id="leaderboard" class="max-w-4xl mx-auto px-4 py-16 w-full">
         <div class="flex justify-between items-end mb-6">
@@ -92,11 +74,9 @@
                 <button class="bg-purple-600 text-white px-3 py-1.5 rounded-lg">Global</button>
                 <button class="bg-slate-800 text-slate-400 hover:text-white px-3 py-1.5 rounded-lg">NA</button>
                 <button class="bg-slate-800 text-slate-400 hover:text-white px-3 py-1.5 rounded-lg">EU</button>
-                <button class="bg-slate-800 text-slate-400 hover:text-white px-3 py-1.5 rounded-lg">LATAM</button>
             </div>
         </div>
 
-        <!-- Board List -->
         <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
             <div class="flex items-center justify-between p-4 border-b border-slate-800/80 bg-slate-800/30">
                 <div class="flex items-center gap-4">
@@ -120,55 +100,21 @@
                 </div>
                 <span class="bg-purple-900/50 text-purple-300 border border-purple-700/50 text-xs px-2.5 py-1 rounded-md font-medium">Founding Creator</span>
             </div>
-            <div class="flex items-center justify-between p-4">
-                <div class="flex items-center gap-4">
-                    <span class="text-lg font-bold text-slate-500 w-6">#3</span>
-                    <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-sm">WZ</div>
-                    <div>
-                        <div class="font-bold text-white">LoadoutMaster</div>
-                        <div class="text-xs text-slate-400">YouTube Gaming · Germany</div>
-                    </div>
-                </div>
-                <span class="bg-purple-900/50 text-purple-300 border border-purple-700/50 text-xs px-2.5 py-1 rounded-md font-medium">Founding Creator</span>
-            </div>
         </div>
     </section>
 
-    <!-- How It Works -->
-    <section id="how-it-works" class="max-w-5xl mx-auto px-4 py-16 border-t border-slate-800">
-        <div class="text-center mb-12">
-            <h2 class="text-xs font-bold text-pink-500 uppercase tracking-widest mb-2">How It Works</h2>
-            <p class="text-3xl font-extrabold">Turn creator status into a global competition.</p>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
-                <div class="text-3xl font-black text-purple-500 mb-4">01</div>
-                <h3 class="text-xl font-bold mb-2">Claim</h3>
-                <p class="text-slate-400 text-sm">Create your creator profile during the free beta and receive the permanent Founding Creator badge.</p>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
-                <div class="text-3xl font-black text-pink-500 mb-4">02</div>
-                <h3 class="text-xl font-bold mb-2">Compete</h3>
-                <p class="text-slate-400 text-sm">Season 0 rankings are a test. Future seasons will introduce paid positioning under clearly stated rules.</p>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
-                <div class="text-3xl font-black text-red-500 mb-4">03</div>
-                <h3 class="text-xl font-bold mb-2">Share</h3>
-                <p class="text-slate-400 text-sm">Every position can become social content: “I just took #1 on Warzone Leaderboard.” Designed for TikTok, YouTube, Twitch, and X.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Claim / Form Section -->
+    <!-- Claim Section (Form & Viral Screenshot Card) -->
     <section id="claim" class="max-w-3xl mx-auto px-4 py-16">
-        <div class="bg-gradient-to-b from-slate-900 to-purple-950/40 border border-purple-800/40 p-8 rounded-3xl text-center shadow-2xl">
+        <!-- Form Primario -->
+        <div id="formContainer" class="bg-gradient-to-b from-slate-900 to-purple-950/40 border border-purple-800/40 p-8 rounded-3xl text-center shadow-2xl">
             <span class="bg-pink-500/20 text-pink-300 border border-pink-500/30 text-xs px-3 py-1 rounded-full uppercase tracking-widest font-semibold inline-block mb-4">
                 Founding Creator Program
             </span>
             <h2 class="text-3xl font-black mb-2">Season 0 is completely free.</h2>
             <p class="text-slate-400 text-sm max-w-md mx-auto mb-6">
-                No credit card or payment required. Claim your handle and lock in your Founding Creator badge for future seasons.
+                No credit card required. Claim your handle and lock in your Founding Creator badge.
             </p>
+            
             <form id="signupForm" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                 <input type="text" id="creatorHandle" placeholder="Enter your handle (e.g. @username)" required
                     class="bg-slate-950 border border-slate-700 px-4 py-3 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 flex-1">
@@ -176,9 +122,29 @@
                     Claim a spot
                 </button>
             </form>
-            <p id="statusMsg" class="text-xs text-slate-500 mt-4">
-                Concept MVP · No payments are collected in Season 0.
-            </p>
+        </div>
+
+        <!-- Card di Successo Generata per Screenshot -->
+        <div id="successCard" class="hidden bg-gradient-to-b from-purple-900/90 via-slate-900 to-slate-950 border-2 border-pink-500 p-8 rounded-3xl text-center shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 bg-pink-500 text-black text-[10px] font-black px-4 py-1 rounded-bl-lg uppercase tracking-widest">
+                VERIFIED BETA SPOT
+            </div>
+            <div class="text-5xl mb-2">🔥</div>
+            <h3 class="text-3xl font-black text-white mb-1">YOU'RE IN THE BETA!</h3>
+            <p class="text-slate-300 text-sm mb-4">Welcome to Season 0, <span id="displayHandle" class="text-pink-400 font-bold"></span></p>
+            
+            <div class="bg-slate-950/80 border border-purple-500/40 p-4 rounded-xl my-6">
+                <p class="text-xs text-purple-300 uppercase tracking-widest font-bold mb-1">Status Awarded</p>
+                <div class="text-xl font-black text-white">FOUNDING CREATOR BADGE #<span id="badgeNum"></span></div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-6">
+                <p class="text-xs text-slate-200 font-bold mb-3">📸 SCREENSHOT THIS SCREEN!</p>
+                <p class="text-xs text-slate-400 mb-4">Post it on your <span class="text-pink-400 font-semibold">Instagram Stories</span> & tag <span class="text-purple-400 font-semibold">@CreatorClash</span> to lock your spot and get featured!</p>
+                <button onclick="shareOnX()" class="bg-black hover:bg-slate-900 border border-slate-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 mx-auto transition">
+                    <span>Share on X / Twitter</span>
+                </button>
+            </div>
         </div>
     </section>
 
@@ -191,10 +157,21 @@
         document.getElementById('signupForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const handle = document.getElementById('creatorHandle').value;
-            localStorage.setItem('founding_creator', handle);
-            document.getElementById('statusMsg').innerText = `✓ Profile "${handle}" successfully registered!`;
-            document.getElementById('statusMsg').className = "text-xs text-green-400 font-semibold mt-4";
+            const randomBadge = Math.floor(Math.random() * 80) + 21;
+            
+            document.getElementById('displayHandle').innerText = handle;
+            document.getElementById('badgeNum').innerText = randomBadge;
+            
+            document.getElementById('formContainer').classList.add('hidden');
+            document.getElementById('successCard').classList.remove('hidden');
         });
+
+        function shareOnX() {
+            const handle = document.getElementById('displayHandle').innerText;
+            const text = encodeURIComponent(`Just locked in my Founding Creator spot for @CreatorClash Season 0 Beta! 🎯\n\nClaim yours before spots run out:`);
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+        }
     </script>
 </body>
 </html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Clash — Global Warzone Beta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                purple: '#8b5cf6',
+                pink: '#ec4899',
+                dark: '#0f172a',
+                card: '#1e293b'
+              }
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-brand-dark text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Header / Navbar -->
+    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-2xl font-black tracking-wider bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+                CREATORCLASH
+            </div>
+            <nav class="hidden md:flex gap-6 text-sm font-semibold text-slate-300">
+                <a href="#leaderboard" class="hover:text-pink-400 transition">Warzone Board</a>
+                <a href="#how-it-works" class="hover:text-pink-400 transition">How it works</a>
+            </nav>
+            <a href="#claim" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-5 py-2 rounded-full font-bold text-sm shadow-lg shadow-purple-500/20 transition">
+                Join Season 0
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="max-w-4xl mx-auto text-center px-4 pt-20 pb-12">
+        <span class="bg-purple-950/80 text-purple-300 border border-purple-800/50 text-xs px-3 py-1 rounded-full uppercase tracking-widest font-semibold inline-block mb-4">
+            WARZONE EDITION · GLOBAL BETA
+        </span>
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+            Who deserves <br/>
+            <span class="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent">#1 IN WARZONE?</span>
+        </h1>
+        <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-8">
+            Creator Clash is the ultimate competitive leaderboard for Warzone gaming creators worldwide. Claim your profile, build status, and make your position worth talking about.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="#claim" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg shadow-pink-500/25 hover:scale-105 transition transform">
+                Become a Founding Creator
+            </a>
+            <a href="#leaderboard" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 px-8 py-4 rounded-xl font-bold text-lg transition">
+                See Leaderboard
+            </a>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="border-y border-slate-800 bg-slate-900/30 py-8">
+        <div class="max-w-4xl mx-auto grid grid-cols-3 text-center px-4">
+            <div>
+                <div class="text-3xl font-extrabold text-white">127</div>
+                <div class="text-xs text-slate-500 uppercase tracking-wider mt-1">Founding Creators</div>
+            </div>
+            <div>
+                <div class="text-3xl font-extrabold text-white">38</div>
+                <div class="text-xs text-slate-500 uppercase tracking-wider mt-1">Countries</div>
+            </div>
+            <div>
+                <div class="text-3xl font-extrabold text-white">Warzone</div>
+                <div class="text-xs text-slate-500 uppercase tracking-wider mt-1">Season 0 Beta</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaderboard Preview -->
+    <section id="leaderboard" class="max-w-4xl mx-auto px-4 py-16 w-full">
+        <div class="flex justify-between items-end mb-6">
+            <div>
+                <span class="text-pink-500 font-bold text-xs uppercase tracking-widest">Live Board</span>
+                <h2 class="text-2xl font-bold text-white">Global Warzone Creators</h2>
+            </div>
+            <div class="flex gap-2 text-xs font-semibold">
+                <button class="bg-purple-600 text-white px-3 py-1.5 rounded-lg">Global</button>
+                <button class="bg-slate-800 text-slate-400 hover:text-white px-3 py-1.5 rounded-lg">NA</button>
+                <button class="bg-slate-800 text-slate-400 hover:text-white px-3 py-1.5 rounded-lg">EU</button>
+                <button class="bg-slate-800 text-slate-400 hover:text-white px-3 py-1.5 rounded-lg">LATAM</button>
+            </div>
+        </div>
+
+        <!-- Board List -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+            <div class="flex items-center justify-between p-4 border-b border-slate-800/80 bg-slate-800/30">
+                <div class="flex items-center gap-4">
+                    <span class="text-lg font-bold text-amber-400 w-6">#1</span>
+                    <div class="w-10 h-10 rounded-full bg-slate-700 border border-purple-500 flex items-center justify-center font-bold text-sm">WZ</div>
+                    <div>
+                        <div class="font-bold text-white">Ghost_Sniper</div>
+                        <div class="text-xs text-slate-400">Twitch Streamer · USA</div>
+                    </div>
+                </div>
+                <span class="bg-purple-900/50 text-purple-300 border border-purple-700/50 text-xs px-2.5 py-1 rounded-md font-medium">Founding Creator</span>
+            </div>
+            <div class="flex items-center justify-between p-4 border-b border-slate-800/80">
+                <div class="flex items-center gap-4">
+                    <span class="text-lg font-bold text-slate-400 w-6">#2</span>
+                    <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-sm">WZ</div>
+                    <div>
+                        <div class="font-bold text-white">VerdanskKing</div>
+                        <div class="text-xs text-slate-400">TikTok Creator · UK</div>
+                    </div>
+                </div>
+                <span class="bg-purple-900/50 text-purple-300 border border-purple-700/50 text-xs px-2.5 py-1 rounded-md font-medium">Founding Creator</span>
+            </div>
+            <div class="flex items-center justify-between p-4">
+                <div class="flex items-center gap-4">
+                    <span class="text-lg font-bold text-slate-500 w-6">#3</span>
+                    <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-sm">WZ</div>
+                    <div>
+                        <div class="font-bold text-white">LoadoutMaster</div>
+                        <div class="text-xs text-slate-400">YouTube Gaming · Germany</div>
+                    </div>
+                </div>
+                <span class="bg-purple-900/50 text-purple-300 border border-purple-700/50 text-xs px-2.5 py-1 rounded-md font-medium">Founding Creator</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="max-w-5xl mx-auto px-4 py-16 border-t border-slate-800">
+        <div class="text-center mb-12">
+            <h2 class="text-xs font-bold text-pink-500 uppercase tracking-widest mb-2">How It Works</h2>
+            <p class="text-3xl font-extrabold">Turn creator status into a global competition.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+                <div class="text-3xl font-black text-purple-500 mb-4">01</div>
+                <h3 class="text-xl font-bold mb-2">Claim</h3>
+                <p class="text-slate-400 text-sm">Create your creator profile during the free beta and receive the permanent Founding Creator badge.</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+                <div class="text-3xl font-black text-pink-500 mb-4">02</div>
+                <h3 class="text-xl font-bold mb-2">Compete</h3>
+                <p class="text-slate-400 text-sm">Season 0 rankings are a test. Future seasons will introduce paid positioning under clearly stated rules.</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+                <div class="text-3xl font-black text-red-500 mb-4">03</div>
+                <h3 class="text-xl font-bold mb-2">Share</h3>
+                <p class="text-slate-400 text-sm">Every position can become social content: “I just took #1 on Warzone Leaderboard.” Designed for TikTok, YouTube, Twitch, and X.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Claim / Form Section -->
+    <section id="claim" class="max-w-3xl mx-auto px-4 py-16">
+        <div class="bg-gradient-to-b from-slate-900 to-purple-950/40 border border-purple-800/40 p-8 rounded-3xl text-center shadow-2xl">
+            <span class="bg-pink-500/20 text-pink-300 border border-pink-500/30 text-xs px-3 py-1 rounded-full uppercase tracking-widest font-semibold inline-block mb-4">
+                Founding Creator Program
+            </span>
+            <h2 class="text-3xl font-black mb-2">Season 0 is completely free.</h2>
+            <p class="text-slate-400 text-sm max-w-md mx-auto mb-6">
+                No credit card or payment required. Claim your handle and lock in your Founding Creator badge for future seasons.
+            </p>
+            <form id="signupForm" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                <input type="text" id="creatorHandle" placeholder="Enter your handle (e.g. @username)" required
+                    class="bg-slate-950 border border-slate-700 px-4 py-3 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 flex-1">
+                <button type="submit" class="bg-purple-600 hover:bg-purple-500 text-white font-bold px-6 py-3 rounded-xl transition">
+                    Claim a spot
+                </button>
+            </form>
+            <p id="statusMsg" class="text-xs text-slate-500 mt-4">
+                Concept MVP · No payments are collected in Season 0.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-600">
+        &copy; 2026 CREATORCLASH WARZONE. All rights reserved.
+    </footer>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const handle = document.getElementById('creatorHandle').value;
+            localStorage.setItem('founding_creator', handle);
+            document.getElementById('statusMsg').innerText = `✓ Profile "${handle}" successfully registered!`;
+            document.getElementById('statusMsg').className = "text-xs text-green-400 font-semibold mt-4";
+        });
+    </script>
+</body>
+</html>

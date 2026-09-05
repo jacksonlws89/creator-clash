@@ -135,13 +135,12 @@
     <script>
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFM4KAlbdq6WgoedS9_U2WeDPVC4a_tL4_qRATdpoldjbIlQ-5lwGlteXqQSNLu2eB/exec";
 
-        // Funzione per caricare la classifica dinamica dal Google Sheet
-        async function loadLeaderboard() {
+        // Caricamento classifica tramite JSONP
+        function loadLeaderboard() {
             const container = document.getElementById('leaderboardContainer');
-            try {
-                const response = await fetch(GOOGLE_SCRIPT_URL);
-                const creators = await response.json();
-
+            const script = document.createElement('script');
+            
+            window.handleLeaderboardData = function(creators) {
                 if (!creators || creators.length === 0) {
                     container.innerHTML = `<div class="p-6 text-center text-slate-400 text-sm">Nessun creator ancora iscritto. Diventa il primo!</div>`;
                     return;
@@ -167,12 +166,19 @@
                     `;
                 });
                 container.innerHTML = html;
-            } catch (err) {
+                if (script.parentNode) {
+                    document.body.removeChild(script);
+                }
+            };
+
+            script.src = GOOGLE_SCRIPT_URL + '?callback=handleLeaderboardData';
+            script.onerror = function() {
                 container.innerHTML = `<div class="p-6 text-center text-slate-400 text-sm">Impossibile caricare la classifica al momento.</div>`;
-            }
+            };
+            document.body.appendChild(script);
         }
 
-        // Carica la classifica all'apertura
+        // Carica la classifica all'apertura della pagina
         loadLeaderboard();
 
         document.getElementById('signupForm').addEventListener('submit', function(e) {
@@ -183,7 +189,7 @@
             document.getElementById('displayHandle').innerText = handle;
             document.getElementById('badgeNum').innerText = randomBadge;
             
-            // Invio automatico dei dati al Google Sheet
+            // Invio automatico dati a Google Sheet
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -195,7 +201,7 @@
                     badge: randomBadge
                 })
             }).then(() => {
-                // Ricarica la classifica dopo l'iscrizione
+                // Aggiorna la classifica subito dopo l'iscrizione
                 setTimeout(loadLeaderboard, 1500);
             }).catch(err => console.error("Errore invio dati:", err));
             

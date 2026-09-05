@@ -14,7 +14,6 @@
 </head>
 <body class="min-h-screen pb-12 flex flex-col items-center px-4">
 
-    <!-- Header / Navbar -->
     <header class="w-full max-w-xl py-6 flex justify-between items-center">
         <h1 class="text-2xl font-black tracking-wider gradient-text uppercase">CreatorClash</h1>
         <button class="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-xs px-4 py-2 rounded-full uppercase tracking-wider hover:opacity-90 transition">
@@ -22,10 +21,8 @@
         </button>
     </header>
 
-    <!-- Main Container -->
     <main class="w-full max-w-xl flex flex-col gap-6">
 
-        <!-- Form Claim Badge -->
         <div class="card-gradient rounded-2xl p-6 shadow-2xl">
             <h3 class="text-lg font-bold text-white mb-4">Claim Your Founder Badge</h3>
             <form id="claimForm" onsubmit="submitForm(event)" class="flex flex-col gap-4">
@@ -39,7 +36,6 @@
             </form>
         </div>
 
-        <!-- Classifica -->
         <div class="flex justify-between items-center">
             <div>
                 <h2 class="text-xl font-extrabold text-white">Global Warzone</h2>
@@ -52,7 +48,6 @@
             </div>
         </div>
 
-        <!-- Leaderboard Table Card -->
         <div class="card-gradient rounded-2xl overflow-hidden shadow-2xl">
             <div id="leaderboardContainer" class="divide-y divide-slate-800/60">
                 <div class="p-8 text-center text-slate-400 text-sm animate-pulse">
@@ -61,7 +56,6 @@
             </div>
         </div>
 
-        <!-- Status Card -->
         <div class="card-gradient rounded-3xl p-6 relative overflow-hidden text-center flex flex-col items-center gap-4">
             <div class="absolute top-0 right-0 bg-pink-600 text-white text-[10px] font-black px-4 py-1 rounded-bl-xl uppercase tracking-widest">
                 Verified Beta Spot
@@ -94,7 +88,6 @@
 
     </main>
 
-    <!-- JavaScript logic -->
     <script>
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxqgrV_v4VQs-mo1ken90c202u9CfKy_qP3Me2O5hCtoY-glZyS6RkgFFCQqQg48fUJ/exec";
 
@@ -106,8 +99,11 @@
                 return;
             }
 
+            // Inverte l'ordine dei dati: l'ultimo iscritto diventa il primo
+            const reversedData = data.slice().reverse();
+
             let html = '';
-            data.forEach((item, index) => {
+            reversedData.forEach((item, index) => {
                 const rank = index + 1;
                 let rankBadge = `<span class="text-slate-400 font-bold w-6 text-center">${rank}</span>`;
                 

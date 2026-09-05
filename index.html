@@ -14,6 +14,7 @@
 </head>
 <body class="min-h-screen pb-12 flex flex-col items-center px-4">
 
+    <!-- Header / Navbar -->
     <header class="w-full max-w-xl py-6 flex justify-between items-center">
         <h1 class="text-2xl font-black tracking-wider gradient-text uppercase">CreatorClash</h1>
         <button class="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-xs px-4 py-2 rounded-full uppercase tracking-wider hover:opacity-90 transition">
@@ -21,8 +22,10 @@
         </button>
     </header>
 
+    <!-- Main Container -->
     <main class="w-full max-w-xl flex flex-col gap-6">
 
+        <!-- Form Claim Badge -->
         <div class="card-gradient rounded-2xl p-6 shadow-2xl">
             <h3 class="text-lg font-bold text-white mb-4">Claim Your Founder Badge</h3>
             <form id="claimForm" onsubmit="submitForm(event)" class="flex flex-col gap-4">
@@ -36,6 +39,7 @@
             </form>
         </div>
 
+        <!-- Classifica -->
         <div class="flex justify-between items-center">
             <div>
                 <h2 class="text-xl font-extrabold text-white">Global Warzone</h2>
@@ -48,14 +52,14 @@
             </div>
         </div>
 
+        <!-- Leaderboard Table Card -->
         <div class="card-gradient rounded-2xl overflow-hidden shadow-2xl">
             <div id="leaderboardContainer" class="divide-y divide-slate-800/60">
-                <div class="p-8 text-center text-slate-400 text-sm animate-pulse">
-                    Caricamento classifica...
-                </div>
+                <!-- Verrà popolato all'istante via JS -->
             </div>
         </div>
 
+        <!-- Status Card -->
         <div class="card-gradient rounded-3xl p-6 relative overflow-hidden text-center flex flex-col items-center gap-4">
             <div class="absolute top-0 right-0 bg-pink-600 text-white text-[10px] font-black px-4 py-1 rounded-bl-xl uppercase tracking-widest">
                 Verified Beta Spot
@@ -88,18 +92,22 @@
 
     </main>
 
+    <!-- JavaScript logic -->
     <script>
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxqgrV_v4VQs-mo1ken90c202u9CfKy_qP3Me2O5hCtoY-glZyS6RkgFFCQqQg48fUJ/exec";
+        
+        // Inizializza leggendo subito dalla memoria locale (istantaneo a 0ms)
+        let currentCreators = JSON.parse(localStorage.getItem('creator_clash_data') || "[]");
 
-        function handleLeaderboardData(data) {
+        function renderLeaderboard(data) {
             const container = document.getElementById('leaderboardContainer');
             
             if (!data || data.length === 0) {
-                container.innerHTML = `<div class="p-6 text-center text-slate-400 text-sm">Nessun creator in classifica.</div>`;
+                container.innerHTML = `<div class="p-6 text-center text-slate-400 text-sm">Caricamento classifica...</div>`;
                 return;
             }
 
-            // Inverte l'ordine dei dati: l'ultimo iscritto diventa il primo
+            // L'ultimo iscritto appare per primo
             const reversedData = data.slice().reverse();
 
             let html = '';
@@ -130,55 +138,59 @@
             container.innerHTML = html;
         }
 
-        function loadLeaderboard() {
-            const container = document.getElementById('leaderboardContainer');
+        function handleLeaderboardData(data) {
+            if (data && Array.isArray(data) && data.length > 0) {
+                currentCreators = data;
+                // Salva nella memoria del dispositivo per la prossima riapertura istantanea
+                localStorage.setItem('creator_clash_data', JSON.stringify(data));
+                renderLeaderboard(currentCreators);
+            }
+        }
+
+        function fetchRemoteLeaderboard() {
             const oldScript = document.getElementById('jsonp-script');
             if (oldScript) oldScript.remove();
 
             const script = document.createElement('script');
             script.id = 'jsonp-script';
             script.src = GOOGLE_SCRIPT_URL + '?callback=handleLeaderboardData&_t=' + Date.now();
-            
-            script.onerror = function() {
-                container.innerHTML = `<div class="p-6 text-center text-slate-400 text-sm">Impossibile caricare la classifica al momento.</div>`;
-            };
             document.body.appendChild(script);
         }
 
         function submitForm(e) {
             e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            btn.disabled = true;
-            btn.innerText = 'Invio in corso...';
-
-            // Genera un numero casuale tra 1 e 100
+            const handleValue = document.getElementById('handleInput').value;
             const randomBadge = Math.floor(Math.random() * 100) + 1;
 
-            const payload = {
-                handle: document.getElementById('handleInput').value,
+            const newCreator = {
+                handle: handleValue,
                 badge: randomBadge
             };
+            
+            // 1. AGGIORNAMENTO ISTANTANEO LOCALE
+            currentCreators.push(newCreator);
+            localStorage.setItem('creator_clash_data', JSON.stringify(currentCreators));
+            renderLeaderboard(currentCreators);
 
+            document.getElementById('claimForm').reset();
+            alert('Registrazione completata! Il tuo Badge assegnato è #' + randomBadge);
+
+            // 2. INVIO SILENZIOSO A GOOGLE EXCEL
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+                body: JSON.stringify(newCreator)
             }).then(() => {
-                alert('Registrazione completata! Il tuo Badge assegnato è #' + randomBadge);
-                document.getElementById('claimForm').reset();
-                btn.disabled = false;
-                btn.innerText = 'CLAIM BADGE';
-                setTimeout(loadLeaderboard, 1500);
-            }).catch(() => {
-                alert('Errore durante l\'invio.');
-                btn.disabled = false;
-                btn.innerText = 'CLAIM BADGE';
+                setTimeout(fetchRemoteLeaderboard, 2000);
             });
         }
 
-        // Caricamento all'avvio
-        loadLeaderboard();
+        // MOSTRA SUBITO LA CLASSIFICA ALL'APERTURA (0ms)
+        renderLeaderboard(currentCreators);
+        
+        // SINCRONIZZA CON GOOGLE IN BACKGROUND
+        fetchRemoteLeaderboard();
     </script>
 </body>
 </html>

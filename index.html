@@ -1,171 +1,138 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creator Clash — Global Warzone Beta</title>
+    <title>Creator Clash - Leaderboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            colors: {
-              brand: {
-                purple: '#8b5cf6',
-                pink: '#ec4899',
-                dark: '#0f172a',
-                card: '#1e293b'
-              }
-            }
-          }
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0f19;
+            color: #ffffff;
         }
-      }
-    </script>
+        .gradient-text {
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-gradient {
+            background: linear-gradient(180deg, rgba(30, 27, 75, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+    </style>
 </head>
-<body class="bg-brand-dark text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
+<body class="min-h-screen pb-12 flex flex-col items-center px-4">
 
     <!-- Header / Navbar -->
-    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-2xl font-black tracking-wider bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-                CREATORCLASH
-            </div>
-            <nav class="hidden md:flex gap-6 text-sm font-semibold text-slate-300">
-                <a href="#leaderboard" class="hover:text-pink-400 transition">Warzone Board</a>
-                <a href="#how-it-works" class="hover:text-pink-400 transition">How it works</a>
-            </nav>
-            <a href="#claim" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-5 py-2 rounded-full font-bold text-sm shadow-lg shadow-purple-500/20 transition">
-                Join Season 0
-            </a>
-        </div>
+    <header class="w-full max-w-xl py-6 flex justify-between items-center">
+        <h1 class="text-2xl font-black tracking-wider gradient-text uppercase">CreatorClash</h1>
+        <button class="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-xs px-4 py-2 rounded-full uppercase tracking-wider hover:opacity-90 transition">
+            Join Season 0
+        </button>
     </header>
 
-    <!-- Hero Section -->
-    <section class="max-w-4xl mx-auto text-center px-4 pt-20 pb-12">
-        <span class="bg-purple-950/80 text-purple-300 border border-purple-800/50 text-xs px-3 py-1 rounded-full uppercase tracking-widest font-semibold inline-block mb-4">
-            WARZONE EDITION · GLOBAL BETA
-        </span>
-        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
-            Who deserves <br/>
-            <span class="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent">#1 IN WARZONE?</span>
-        </h1>
-        <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-8">
-            Creator Clash is the ultimate competitive leaderboard for Warzone gaming creators worldwide. Claim your profile, build status, and make your position worth talking about.
-        </p>
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="#claim" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg shadow-pink-500/25 hover:scale-105 transition transform">
-                Become a Founding Creator
-            </a>
-            <a href="#leaderboard" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 px-8 py-4 rounded-xl font-bold text-lg transition">
-                See Leaderboard
-            </a>
-        </div>
-    </section>
+    <!-- Main Container -->
+    <main class="w-full max-w-xl flex flex-col gap-6">
 
-    <!-- Leaderboard Preview -->
-    <section id="leaderboard" class="max-w-4xl mx-auto px-4 py-16 w-full">
-        <div class="flex justify-between items-end mb-6">
+        <!-- Title & Region Selector -->
+        <div class="flex justify-between items-center">
             <div>
-                <span class="text-pink-500 font-bold text-xs uppercase tracking-widest">Live Board</span>
-                <h2 class="text-2xl font-bold text-white">Global Warzone Creators</h2>
+                <h2 class="text-xl font-extrabold text-white">Global Warzone</h2>
+                <p class="text-lg font-bold text-slate-300">Creators</p>
             </div>
-            <div class="flex gap-2 text-xs font-semibold">
-                <button class="bg-purple-600 text-white px-3 py-1.5 rounded-lg">Global</button>
-                <button class="bg-slate-800 text-slate-400 hover:text-white px-3 py-1.5 rounded-lg">NA</button>
-                <button class="bg-slate-800 text-slate-400 hover:text-white px-3 py-1.5 rounded-lg">EU</button>
+            <div class="flex gap-1 bg-slate-900/80 p-1 rounded-lg border border-slate-800">
+                <button class="px-3 py-1 text-xs font-bold bg-purple-600 text-white rounded-md">Global</button>
+                <button class="px-3 py-1 text-xs font-bold text-slate-400 hover:text-white transition">NA</button>
+                <button class="px-3 py-1 text-xs font-bold text-slate-400 hover:text-white transition">EU</button>
             </div>
         </div>
 
-        <div id="leaderboardContainer" class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
-            <div class="p-6 text-center text-slate-400 text-sm">Caricamento classifica...</div>
+        <!-- Leaderboard Table Card -->
+        <div class="card-gradient rounded-2xl overflow-hidden shadow-2xl">
+            <div id="leaderboardContainer" class="divide-y divide-slate-800/60">
+                <div class="p-8 text-center text-slate-400 text-sm animate-pulse">
+                    Caricamento classifica...
+                </div>
+            </div>
         </div>
-    </section>
 
-    <!-- Claim Section (Form & Viral Screenshot Card) -->
-    <section id="claim" class="max-w-3xl mx-auto px-4 py-16">
-        <!-- Form Primario -->
-        <div id="formContainer" class="bg-gradient-to-b from-slate-900 to-purple-950/40 border border-purple-800/40 p-8 rounded-3xl text-center shadow-2xl">
-            <span class="bg-pink-500/20 text-pink-300 border border-pink-500/30 text-xs px-3 py-1 rounded-full uppercase tracking-widest font-semibold inline-block mb-4">
-                Founding Creator Program
-            </span>
-            <h2 class="text-3xl font-black mb-2">Season 0 is completely free.</h2>
-            <p class="text-slate-400 text-sm max-w-md mx-auto mb-6">
-                No credit card required. Claim your handle and lock in your Founding Creator badge.
+        <!-- Status Card -->
+        <div class="card-gradient rounded-3xl p-6 relative overflow-hidden text-center flex flex-col items-center gap-4">
+            <div class="absolute top-0 right-0 bg-pink-600 text-white text-[10px] font-black px-4 py-1 rounded-bl-xl uppercase tracking-widest">
+                Verified Beta Spot
+            </div>
+
+            <div class="text-4xl mt-2">🔥</div>
+
+            <div>
+                <h3 class="text-2xl font-black text-white tracking-wide">YOU'RE IN THE BETA!</h3>
+                <p class="text-sm text-slate-300 mt-1">Welcome to Season 0</p>
+            </div>
+
+            <!-- Status Box -->
+            <div class="w-full bg-slate-950/60 border border-slate-800 rounded-xl p-4 flex flex-col items-center">
+                <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-1">Status Awarded</span>
+                <span class="text-lg font-black text-white tracking-wide">FOUNDING CREATOR BADGE</span>
+            </div>
+
+            <!-- Call To Action -->
+            <div class="mt-2 text-xs font-bold text-slate-300 tracking-wider">
+                📸 SCREENSHOT THIS SCREEN!
+            </div>
+            <p class="text-[11px] text-slate-400 max-w-xs -mt-2">
+                Post it on your <span class="text-slate-200 font-semibold">Instagram Stories</span> & tag 
+                <span class="text-purple-400 font-semibold">@CreatorClash</span> to lock your spot and get featured!
             </p>
-            
-            <form id="signupForm" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                <input type="text" id="creatorHandle" placeholder="Enter your handle (e.g. @username)" required
-                    class="bg-slate-950 border border-slate-700 px-4 py-3 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 flex-1">
-                <button type="submit" class="bg-purple-600 hover:bg-purple-500 text-white font-bold px-6 py-3 rounded-xl transition">
-                    Claim a spot
-                </button>
-            </form>
+
+            <button class="w-full py-3 bg-black hover:bg-slate-900 border border-slate-700 text-white font-bold text-xs rounded-xl transition flex items-center justify-center gap-2 mt-1">
+                Share on X / Twitter
+            </button>
         </div>
 
-        <!-- Card di Successo Generata per Screenshot -->
-        <div id="successCard" class="hidden bg-gradient-to-b from-purple-900/90 via-slate-900 to-slate-950 border-2 border-pink-500 p-8 rounded-3xl text-center shadow-2xl relative overflow-hidden">
-            <div class="absolute top-0 right-0 bg-pink-500 text-black text-[10px] font-black px-4 py-1 rounded-bl-lg uppercase tracking-widest">
-                VERIFIED BETA SPOT
-            </div>
-            <div class="text-5xl mb-2">🔥</div>
-            <h3 class="text-3xl font-black text-white mb-1">YOU'RE IN THE BETA!</h3>
-            <p class="text-slate-300 text-sm mb-4">Welcome to Season 0, <span id="displayHandle" class="text-pink-400 font-bold"></span></p>
-            
-            <div class="bg-slate-950/80 border border-purple-500/40 p-4 rounded-xl my-6">
-                <p class="text-xs text-purple-300 uppercase tracking-widest font-bold mb-1">Status Awarded</p>
-                <div class="text-xl font-black text-white">FOUNDING CREATOR BADGE #<span id="badgeNum"></span></div>
-            </div>
+    </main>
 
-            <div class="border-t border-slate-800 pt-6">
-                <p class="text-xs text-slate-200 font-bold mb-3">📸 SCREENSHOT THIS SCREEN!</p>
-                <p class="text-xs text-slate-400 mb-4">Post it on your <span class="text-pink-400 font-semibold">Instagram Stories</span> & tag <span class="text-purple-400 font-semibold">@CreatorClash</span> to lock your spot and get featured!</p>
-                <button onclick="shareOnX()" class="bg-black hover:bg-slate-900 border border-slate-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 mx-auto transition">
-                    <span>Share on X / Twitter</span>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-600">
-        &copy; 2026 CREATORCLASH WARZONE. All rights reserved.
-    </footer>
-
+    <!-- JavaScript logic -->
     <script>
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzFm1r_HIXK3zlchHH7MwKCC35Q8bq0W9YVkp0_F__GRatEl0XBkTQgpZ4REs75EaLE/exec";
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx_xe2kK27aHL9tW0Bq4Beb607eqhGEZ68aM0Fgq9w0Fe-c0q3aWNixO3z1okiGjvA/exec";
 
-        // Callback globale per ricevere i dati da Google Apps Script
-        window.handleLeaderboardData = function(creators) {
+        function handleLeaderboardData(data) {
             const container = document.getElementById('leaderboardContainer');
-            if (!creators || creators.length === 0) {
-                container.innerHTML = `<div class="p-6 text-center text-slate-400 text-sm">Nessun creator ancora iscritto. Diventa il primo!</div>`;
+            
+            if (!data || data.length === 0) {
+                container.innerHTML = `<div class="p-6 text-center text-slate-400 text-sm">Nessun creator in classifica.</div>`;
                 return;
             }
 
             let html = '';
-            creators.forEach((c, index) => {
+            data.forEach((item, index) => {
                 const rank = index + 1;
-                const rankColor = rank === 1 ? 'text-amber-400' : (rank === 2 ? 'text-slate-300' : (rank === 3 ? 'text-amber-600' : 'text-slate-400'));
+                let rankBadge = `<span class="text-slate-400 font-bold w-6 text-center">${rank}</span>`;
                 
+                if (rank === 1) rankBadge = `<span class="text-amber-400 font-extrabold w-6 text-center">🥇</span>`;
+                if (rank === 2) rankBadge = `<span class="text-slate-300 font-extrabold w-6 text-center">🥈</span>`;
+                if (rank === 3) rankBadge = `<span class="text-amber-600 font-extrabold w-6 text-center">🥉</span>`;
+
                 html += `
-                    <div class="flex items-center justify-between p-4 border-b border-slate-800/80 ${rank === 1 ? 'bg-slate-800/30' : ''}">
-                        <div class="flex items-center gap-4">
-                            <span class="text-lg font-bold ${rankColor} w-6">#${rank}</span>
-                            <div class="w-10 h-10 rounded-full bg-slate-700 ${rank === 1 ? 'border border-purple-500' : ''} flex items-center justify-center font-bold text-sm">WZ</div>
+                    <div class="p-4 flex items-center justify-between hover:bg-slate-800/30 transition">
+                        <div class="flex items-center gap-3">
+                            ${rankBadge}
                             <div>
-                                <div class="font-bold text-white">${c.handle}</div>
-                                <div class="text-xs text-slate-400">Badge #${c.badge} · Founding Creator</div>
+                                <div class="font-bold text-white text-sm">${item.handle || 'Anonimo'}</div>
+                                <div class="text-[10px] text-purple-400 uppercase font-semibold tracking-wider">Founding Creator</div>
                             </div>
                         </div>
-                        <span class="bg-purple-900/50 text-purple-300 border border-purple-700/50 text-xs px-2.5 py-1 rounded-md font-medium">Founding Creator</span>
+                        <div class="bg-purple-950/50 border border-purple-500/30 px-3 py-1 rounded-full text-xs font-black text-purple-300">
+                            #${item.badge || 'N/A'}
+                        </div>
                     </div>
                 `;
             });
-            container.innerHTML = html;
-        };
 
-        // Funzione per richiamare lo script
+            container.innerHTML = html;
+        }
+
         function loadLeaderboard() {
             const container = document.getElementById('leaderboardContainer');
             const oldScript = document.getElementById('jsonp-script');
@@ -173,48 +140,18 @@
 
             const script = document.createElement('script');
             script.id = 'jsonp-script';
-            script.src = GOOGLE_SCRIPT_URL + '?callback=handleLeaderboardData';
+            
+            // Forzo l'aggiornamento evitando la cache del browser
+            script.src = GOOGLE_SCRIPT_URL + '?callback=handleLeaderboardData&_t=' + Date.now();
+            
             script.onerror = function() {
                 container.innerHTML = `<div class="p-6 text-center text-slate-400 text-sm">Impossibile caricare la classifica al momento.</div>`;
             };
             document.body.appendChild(script);
         }
 
-        // Avvio all'apertura
+        // Caricamento all'avvio
         loadLeaderboard();
-
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const handle = document.getElementById('creatorHandle').value;
-            const randomBadge = Math.floor(Math.random() * 80) + 21;
-            
-            document.getElementById('displayHandle').innerText = handle;
-            document.getElementById('badgeNum').innerText = randomBadge;
-            
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    handle: handle,
-                    badge: randomBadge
-                })
-            }).then(() => {
-                setTimeout(loadLeaderboard, 1500);
-            }).catch(err => console.error("Errore invio dati:", err));
-            
-            document.getElementById('formContainer').classList.add('hidden');
-            document.getElementById('successCard').classList.remove('hidden');
-        });
-
-        function shareOnX() {
-            const handle = document.getElementById('displayHandle').innerText;
-            const text = encodeURIComponent(`Just locked in my Founding Creator spot for @CreatorClash Season 0 Beta! 🎯\n\nClaim yours before spots run out:`);
-            const url = encodeURIComponent(window.location.href);
-            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
-        }
     </script>
 </body>
 </html>

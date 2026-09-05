@@ -1,36 +1,194 @@
-<script>
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx_xe2kK27aHL9tWObq4Beb607eqhGEZ68aM0Fgq9w0Fe-c0q3aWNixO3z1okiGjvA/exec";
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Clash — Global Warzone Beta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                purple: '#8b5cf6',
+                pink: '#ec4899',
+                dark: '#0f172a',
+                card: '#1e293b'
+              }
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-brand-dark text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
 
-    document.getElementById('signupForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const handle = document.getElementById('creatorHandle').value;
-        const randomBadge = Math.floor(Math.random() * 80) + 21;
-        
-        document.getElementById('displayHandle').innerText = handle;
-        document.getElementById('badgeNum').innerText = randomBadge;
-        
-        // Invia i dati al Google Sheet in background
-        fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                handle: handle,
-                badge: randomBadge
-            })
+    <!-- Header / Navbar -->
+    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-2xl font-black tracking-wider bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+                CREATORCLASH
+            </div>
+            <nav class="hidden md:flex gap-6 text-sm font-semibold text-slate-300">
+                <a href="#leaderboard" class="hover:text-pink-400 transition">Warzone Board</a>
+                <a href="#how-it-works" class="hover:text-pink-400 transition">How it works</a>
+            </nav>
+            <a href="#claim" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-5 py-2 rounded-full font-bold text-sm shadow-lg shadow-purple-500/20 transition">
+                Join Season 0
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="max-w-4xl mx-auto text-center px-4 pt-20 pb-12">
+        <span class="bg-purple-950/80 text-purple-300 border border-purple-800/50 text-xs px-3 py-1 rounded-full uppercase tracking-widest font-semibold inline-block mb-4">
+            WARZONE EDITION · GLOBAL BETA
+        </span>
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+            Who deserves <br/>
+            <span class="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent">#1 IN WARZONE?</span>
+        </h1>
+        <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-8">
+            Creator Clash is the ultimate competitive leaderboard for Warzone gaming creators worldwide. Claim your profile, build status, and make your position worth talking about.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="#claim" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg shadow-pink-500/25 hover:scale-105 transition transform">
+                Become a Founding Creator
+            </a>
+            <a href="#leaderboard" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 px-8 py-4 rounded-xl font-bold text-lg transition">
+                See Leaderboard
+            </a>
+        </div>
+    </section>
+
+    <!-- Leaderboard Preview -->
+    <section id="leaderboard" class="max-w-4xl mx-auto px-4 py-16 w-full">
+        <div class="flex justify-between items-end mb-6">
+            <div>
+                <span class="text-pink-500 font-bold text-xs uppercase tracking-widest">Live Board</span>
+                <h2 class="text-2xl font-bold text-white">Global Warzone Creators</h2>
+            </div>
+            <div class="flex gap-2 text-xs font-semibold">
+                <button class="bg-purple-600 text-white px-3 py-1.5 rounded-lg">Global</button>
+                <button class="bg-slate-800 text-slate-400 hover:text-white px-3 py-1.5 rounded-lg">NA</button>
+                <button class="bg-slate-800 text-slate-400 hover:text-white px-3 py-1.5 rounded-lg">EU</button>
+            </div>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+            <div class="flex items-center justify-between p-4 border-b border-slate-800/80 bg-slate-800/30">
+                <div class="flex items-center gap-4">
+                    <span class="text-lg font-bold text-amber-400 w-6">#1</span>
+                    <div class="w-10 h-10 rounded-full bg-slate-700 border border-purple-500 flex items-center justify-center font-bold text-sm">WZ</div>
+                    <div>
+                        <div class="font-bold text-white">Ghost_Sniper</div>
+                        <div class="text-xs text-slate-400">Twitch Streamer · USA</div>
+                    </div>
+                </div>
+                <span class="bg-purple-900/50 text-purple-300 border border-purple-700/50 text-xs px-2.5 py-1 rounded-md font-medium">Founding Creator</span>
+            </div>
+            <div class="flex items-center justify-between p-4 border-b border-slate-800/80">
+                <div class="flex items-center gap-4">
+                    <span class="text-lg font-bold text-slate-400 w-6">#2</span>
+                    <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-sm">WZ</div>
+                    <div>
+                        <div class="font-bold text-white">VerdanskKing</div>
+                        <div class="text-xs text-slate-400">TikTok Creator · UK</div>
+                    </div>
+                </div>
+                <span class="bg-purple-900/50 text-purple-300 border border-purple-700/50 text-xs px-2.5 py-1 rounded-md font-medium">Founding Creator</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Claim Section (Form & Viral Screenshot Card) -->
+    <section id="claim" class="max-w-3xl mx-auto px-4 py-16">
+        <!-- Form Primario -->
+        <div id="formContainer" class="bg-gradient-to-b from-slate-900 to-purple-950/40 border border-purple-800/40 p-8 rounded-3xl text-center shadow-2xl">
+            <span class="bg-pink-500/20 text-pink-300 border border-pink-500/30 text-xs px-3 py-1 rounded-full uppercase tracking-widest font-semibold inline-block mb-4">
+                Founding Creator Program
+            </span>
+            <h2 class="text-3xl font-black mb-2">Season 0 is completely free.</h2>
+            <p class="text-slate-400 text-sm max-w-md mx-auto mb-6">
+                No credit card required. Claim your handle and lock in your Founding Creator badge.
+            </p>
+            
+            <form id="signupForm" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                <input type="text" id="creatorHandle" placeholder="Enter your handle (e.g. @username)" required
+                    class="bg-slate-950 border border-slate-700 px-4 py-3 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 flex-1">
+                <button type="submit" class="bg-purple-600 hover:bg-purple-500 text-white font-bold px-6 py-3 rounded-xl transition">
+                    Claim a spot
+                </button>
+            </form>
+        </div>
+
+        <!-- Card di Successo Generata per Screenshot -->
+        <div id="successCard" class="hidden bg-gradient-to-b from-purple-900/90 via-slate-900 to-slate-950 border-2 border-pink-500 p-8 rounded-3xl text-center shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 bg-pink-500 text-black text-[10px] font-black px-4 py-1 rounded-bl-lg uppercase tracking-widest">
+                VERIFIED BETA SPOT
+            </div>
+            <div class="text-5xl mb-2">🔥</div>
+            <h3 class="text-3xl font-black text-white mb-1">YOU'RE IN THE BETA!</h3>
+            <p class="text-slate-300 text-sm mb-4">Welcome to Season 0, <span id="displayHandle" class="text-pink-400 font-bold"></span></p>
+            
+            <div class="bg-slate-950/80 border border-purple-500/40 p-4 rounded-xl my-6">
+                <p class="text-xs text-purple-300 uppercase tracking-widest font-bold mb-1">Status Awarded</p>
+                <div class="text-xl font-black text-white">FOUNDING CREATOR BADGE #<span id="badgeNum"></span></div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-6">
+                <p class="text-xs text-slate-200 font-bold mb-3">📸 SCREENSHOT THIS SCREEN!</p>
+                <p class="text-xs text-slate-400 mb-4">Post it on your <span class="text-pink-400 font-semibold">Instagram Stories</span> & tag <span class="text-purple-400 font-semibold">@CreatorClash</span> to lock your spot and get featured!</p>
+                <button onclick="shareOnX()" class="bg-black hover:bg-slate-900 border border-slate-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 mx-auto transition">
+                    <span>Share on X / Twitter</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-600">
+        &copy; 2026 CREATORCLASH WARZONE. All rights reserved.
+    </footer>
+
+    <script>
+        // URL di Google Apps Script integrato
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFM4KAlbdq6WgoedS9_U2WeDPVC4a_tL4_qRATdpoldjbIlQ-5lwGlteXqQSNLu2eB/exec";
+
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const handle = document.getElementById('creatorHandle').value;
+            const randomBadge = Math.floor(Math.random() * 80) + 21;
+            
+            document.getElementById('displayHandle').innerText = handle;
+            document.getElementById('badgeNum').innerText = randomBadge;
+            
+            // Invio automatico dei dati al Google Sheet
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    handle: handle,
+                    badge: randomBadge
+                })
+            }).catch(err => console.error("Errore invio dati:", err));
+            
+            // Passaggio alla visualizzazione della Success Card
+            document.getElementById('formContainer').classList.add('hidden');
+            document.getElementById('successCard').classList.remove('hidden');
         });
 
-        // Mostra subito la card di conferma per lo screenshot
-        document.getElementById('formContainer').classList.add('hidden');
-        document.getElementById('successCard').classList.remove('hidden');
-    });
-
-    function shareOnX() {
-        const handle = document.getElementById('displayHandle').innerText;
-        const text = encodeURIComponent(`Just locked in my Founding Creator spot for @CreatorClash Season 0 Beta! 🎯\n\nClaim yours before spots run out:`);
-        const url = encodeURIComponent(window.location.href);
-        window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
-    }
-</script>
+        function shareOnX() {
+            const handle = document.getElementById('displayHandle').innerText;
+            const text = encodeURIComponent(`Just locked in my Founding Creator spot for @CreatorClash Season 0 Beta! 🎯\n\nClaim yours before spots run out:`);
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+        }
+    </script>
+</body>
+</html>

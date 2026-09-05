@@ -135,42 +135,44 @@
     <script>
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzFm1r_HIXK3zlchHH7MwKCC35Q8bq0W9YVkp0_F__GRatEl0XBkTQgpZ4REs75EaLE/exec";
 
-        // Caricamento classifica tramite JSONP
+        // Callback globale per ricevere i dati da Google Apps Script
+        window.handleLeaderboardData = function(creators) {
+            const container = document.getElementById('leaderboardContainer');
+            if (!creators || creators.length === 0) {
+                container.innerHTML = `<div class="p-6 text-center text-slate-400 text-sm">Nessun creator ancora iscritto. Diventa il primo!</div>`;
+                return;
+            }
+
+            let html = '';
+            creators.forEach((c, index) => {
+                const rank = index + 1;
+                const rankColor = rank === 1 ? 'text-amber-400' : (rank === 2 ? 'text-slate-300' : (rank === 3 ? 'text-amber-600' : 'text-slate-400'));
+                
+                html += `
+                    <div class="flex items-center justify-between p-4 border-b border-slate-800/80 ${rank === 1 ? 'bg-slate-800/30' : ''}">
+                        <div class="flex items-center gap-4">
+                            <span class="text-lg font-bold ${rankColor} w-6">#${rank}</span>
+                            <div class="w-10 h-10 rounded-full bg-slate-700 ${rank === 1 ? 'border border-purple-500' : ''} flex items-center justify-center font-bold text-sm">WZ</div>
+                            <div>
+                                <div class="font-bold text-white">${c.handle}</div>
+                                <div class="text-xs text-slate-400">Badge #${c.badge} · Founding Creator</div>
+                            </div>
+                        </div>
+                        <span class="bg-purple-900/50 text-purple-300 border border-purple-700/50 text-xs px-2.5 py-1 rounded-md font-medium">Founding Creator</span>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        };
+
+        // Funzione per richiamare lo script
         function loadLeaderboard() {
             const container = document.getElementById('leaderboardContainer');
+            const oldScript = document.getElementById('jsonp-script');
+            if (oldScript) oldScript.remove();
+
             const script = document.createElement('script');
-            
-            window.handleLeaderboardData = function(creators) {
-                if (!creators || creators.length === 0) {
-                    container.innerHTML = `<div class="p-6 text-center text-slate-400 text-sm">Nessun creator ancora iscritto. Diventa il primo!</div>`;
-                    return;
-                }
-
-                let html = '';
-                creators.forEach((c, index) => {
-                    const rank = index + 1;
-                    const rankColor = rank === 1 ? 'text-amber-400' : (rank === 2 ? 'text-slate-300' : (rank === 3 ? 'text-amber-600' : 'text-slate-400'));
-                    
-                    html += `
-                        <div class="flex items-center justify-between p-4 border-b border-slate-800/80 ${rank === 1 ? 'bg-slate-800/30' : ''}">
-                            <div class="flex items-center gap-4">
-                                <span class="text-lg font-bold ${rankColor} w-6">#${rank}</span>
-                                <div class="w-10 h-10 rounded-full bg-slate-700 ${rank === 1 ? 'border border-purple-500' : ''} flex items-center justify-center font-bold text-sm">WZ</div>
-                                <div>
-                                    <div class="font-bold text-white">${c.handle}</div>
-                                    <div class="text-xs text-slate-400">Badge #${c.badge} · Founding Creator</div>
-                                </div>
-                            </div>
-                            <span class="bg-purple-900/50 text-purple-300 border border-purple-700/50 text-xs px-2.5 py-1 rounded-md font-medium">Founding Creator</span>
-                        </div>
-                    `;
-                });
-                container.innerHTML = html;
-                if (script.parentNode) {
-                    document.body.removeChild(script);
-                }
-            };
-
+            script.id = 'jsonp-script';
             script.src = GOOGLE_SCRIPT_URL + '?callback=handleLeaderboardData';
             script.onerror = function() {
                 container.innerHTML = `<div class="p-6 text-center text-slate-400 text-sm">Impossibile caricare la classifica al momento.</div>`;
@@ -178,7 +180,7 @@
             document.body.appendChild(script);
         }
 
-        // Carica la classifica all'apertura della pagina
+        // Avvio all'apertura
         loadLeaderboard();
 
         document.getElementById('signupForm').addEventListener('submit', function(e) {
@@ -189,7 +191,6 @@
             document.getElementById('displayHandle').innerText = handle;
             document.getElementById('badgeNum').innerText = randomBadge;
             
-            // Invio automatico dati a Google Sheet
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -201,7 +202,6 @@
                     badge: randomBadge
                 })
             }).then(() => {
-                // Aggiorna la classifica subito dopo l'iscrizione
                 setTimeout(loadLeaderboard, 1500);
             }).catch(err => console.error("Errore invio dati:", err));
             

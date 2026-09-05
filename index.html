@@ -77,29 +77,8 @@
             </div>
         </div>
 
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
-            <div class="flex items-center justify-between p-4 border-b border-slate-800/80 bg-slate-800/30">
-                <div class="flex items-center gap-4">
-                    <span class="text-lg font-bold text-amber-400 w-6">#1</span>
-                    <div class="w-10 h-10 rounded-full bg-slate-700 border border-purple-500 flex items-center justify-center font-bold text-sm">WZ</div>
-                    <div>
-                        <div class="font-bold text-white">Ghost_Sniper</div>
-                        <div class="text-xs text-slate-400">Twitch Streamer · USA</div>
-                    </div>
-                </div>
-                <span class="bg-purple-900/50 text-purple-300 border border-purple-700/50 text-xs px-2.5 py-1 rounded-md font-medium">Founding Creator</span>
-            </div>
-            <div class="flex items-center justify-between p-4 border-b border-slate-800/80">
-                <div class="flex items-center gap-4">
-                    <span class="text-lg font-bold text-slate-400 w-6">#2</span>
-                    <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-sm">WZ</div>
-                    <div>
-                        <div class="font-bold text-white">VerdanskKing</div>
-                        <div class="text-xs text-slate-400">TikTok Creator · UK</div>
-                    </div>
-                </div>
-                <span class="bg-purple-900/50 text-purple-300 border border-purple-700/50 text-xs px-2.5 py-1 rounded-md font-medium">Founding Creator</span>
-            </div>
+        <div id="leaderboardContainer" class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+            <div class="p-6 text-center text-slate-400 text-sm">Caricamento classifica...</div>
         </div>
     </section>
 
@@ -154,8 +133,47 @@
     </footer>
 
     <script>
-        // URL di Google Apps Script integrato
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFM4KAlbdq6WgoedS9_U2WeDPVC4a_tL4_qRATdpoldjbIlQ-5lwGlteXqQSNLu2eB/exec";
+
+        // Funzione per caricare la classifica dinamica dal Google Sheet
+        async function loadLeaderboard() {
+            const container = document.getElementById('leaderboardContainer');
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL);
+                const creators = await response.json();
+
+                if (!creators || creators.length === 0) {
+                    container.innerHTML = `<div class="p-6 text-center text-slate-400 text-sm">Nessun creator ancora iscritto. Diventa il primo!</div>`;
+                    return;
+                }
+
+                let html = '';
+                creators.forEach((c, index) => {
+                    const rank = index + 1;
+                    const rankColor = rank === 1 ? 'text-amber-400' : (rank === 2 ? 'text-slate-300' : (rank === 3 ? 'text-amber-600' : 'text-slate-400'));
+                    
+                    html += `
+                        <div class="flex items-center justify-between p-4 border-b border-slate-800/80 ${rank === 1 ? 'bg-slate-800/30' : ''}">
+                            <div class="flex items-center gap-4">
+                                <span class="text-lg font-bold ${rankColor} w-6">#${rank}</span>
+                                <div class="w-10 h-10 rounded-full bg-slate-700 ${rank === 1 ? 'border border-purple-500' : ''} flex items-center justify-center font-bold text-sm">WZ</div>
+                                <div>
+                                    <div class="font-bold text-white">${c.handle}</div>
+                                    <div class="text-xs text-slate-400">Badge #${c.badge} · Founding Creator</div>
+                                </div>
+                            </div>
+                            <span class="bg-purple-900/50 text-purple-300 border border-purple-700/50 text-xs px-2.5 py-1 rounded-md font-medium">Founding Creator</span>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            } catch (err) {
+                container.innerHTML = `<div class="p-6 text-center text-slate-400 text-sm">Impossibile caricare la classifica al momento.</div>`;
+            }
+        }
+
+        // Carica la classifica all'apertura
+        loadLeaderboard();
 
         document.getElementById('signupForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -176,9 +194,11 @@
                     handle: handle,
                     badge: randomBadge
                 })
+            }).then(() => {
+                // Ricarica la classifica dopo l'iscrizione
+                setTimeout(loadLeaderboard, 1500);
             }).catch(err => console.error("Errore invio dati:", err));
             
-            // Passaggio alla visualizzazione della Success Card
             document.getElementById('formContainer').classList.add('hidden');
             document.getElementById('successCard').classList.remove('hidden');
         });
